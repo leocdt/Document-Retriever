@@ -11,6 +11,9 @@ def process_pdf(file_path, collection):
             for page in pdf_reader.pages:
                 content += page.extract_text()
 
+        # Print the content of the PDF file
+        print(content)
+
         # Add the document to the ChromaDB collection
         collection.add(
             documents=[content],

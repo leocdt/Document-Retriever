@@ -7,6 +7,9 @@ def process_txt(file_path, collection):
         with open(file_path, "r", encoding='utf-8', errors='ignore') as file:
             content = file.read()
 
+        # Print the content of the text file
+        print(content)
+
         # Add the document to the ChromaDB collection
         collection.add(
             documents=[content],

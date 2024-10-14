@@ -7,6 +7,9 @@ def process_md(file_path, collection):
         with open(file_path, "r", encoding='utf-8') as file:
             content = file.read()
 
+        # Print the content of the Markdown file
+        print(content)
+
         # Add the document to the ChromaDB collection
         collection.add(
             documents=[content],

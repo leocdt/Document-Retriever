@@ -4,12 +4,30 @@ import chromadb
 from pdf import process_pdf
 from md import process_md
 from txt import process_txt
+import glob
 
 # Initialize ChromaDB client
 client = chromadb.Client()
 
 # Create or get a collection
 collection = client.get_or_create_collection("documents")
+
+def scan_and_process_files(collection):
+    file_types = {
+        'pdf': process_pdf,
+        'md': process_md,
+        'txt': process_txt
+    }
+    
+    for file_type, process_func in file_types.items():
+        files = glob.glob(f'data/**/*.{file_type}', recursive=True)
+        for file_path in files:
+            process_func(file_path, collection)
+
+# Call this function after creating the collection
+scan_and_process_files(collection)
+
+
 
 # Set up the Streamlit app
 st.title("Document Upload and Vector Database")
@@ -76,4 +94,3 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
-
